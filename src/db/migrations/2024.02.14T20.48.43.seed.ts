@@ -3,7 +3,7 @@ import bycript from "bcrypt";
 
 export const up: Migration = async (params) => {
   const password = await bycript.hash(
-    'admin',
+    'supersecret',
     Number(process.env["BYCRIPT-SALT"]) ?? ""
   );
   return params.context.query(`
