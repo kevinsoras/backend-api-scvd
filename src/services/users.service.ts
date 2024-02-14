@@ -2,17 +2,6 @@ import * as dbUsers from "../data/users.data";
 import { UserData } from "../models/users.schema";
 import { ErrorResponse } from "../utils";
 
-//export const insertListUsers = async (users: UserData[]) => {
-//  try {
-//    const usersListInserted = await dbUsers.insertListUsers(users);
-//    return usersListInserted;
-//  } catch (error: any) {
-//    if (error instanceof ErrorResponse) throw error;
-//    console.log(error);
-//    console.log(error["details"]);
-//    throw new ErrorResponse("Error inserting list of users", 400);
-//  }
-//};
 export const insertListUsers = async (users: UserData[]) => {
   try {
     const successUsers: any[] = [];
