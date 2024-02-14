@@ -1,6 +1,8 @@
 import * as dbUsers from "../data/users.data";
-import { UserData } from "../models/users.schema";
+import { UserAuth, UserData } from "../models/users.schema";
 import { ErrorResponse } from "../utils";
+import { Jwt } from "../utils/Jwt";
+import bycript from "bcrypt";
 
 export const insertListUsers = async (users: UserData[]) => {
   try {
@@ -33,5 +35,25 @@ export const insertListUsers = async (users: UserData[]) => {
     console.log(error);
     console.log(error["details"]);
     throw new ErrorResponse("Error inserting list of users", 400);
+  }
+};
+export const loginAccount = async (data: UserAuth) => {
+  try {
+    const dataUser = await dbUsers.getUserForLogin(data.email);
+    const matchPassword = await bycript.compare(
+      data.password,
+      dataUser["password"]
+    );
+    if (!matchPassword) throw new ErrorResponse("Credencials Incorrect", 400);
+    
+    const jwt = new Jwt(process.env["JWT-KEY"] ?? "");
+    const token = jwt.generateToken({
+      id: dataUser["id"],
+      role: dataUser["role"],
+    });
+    
+    return token;
+  } catch (error) {
+    throw new ErrorResponse("Credencials Incorrect", 401);
   }
 };

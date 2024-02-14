@@ -36,3 +36,8 @@ export const insertUser = async (user: UserData): Promise<any | undefined> => {
   
   return (await query(queryT, values)).rows;
 };
+export const getUserForLogin = async (email: string) => {
+  let queryT = `SELECT id,password,role FROM users where email=$1`;
+  const result = await query(queryT, [email]);
+  return result.rows[0];
+};
