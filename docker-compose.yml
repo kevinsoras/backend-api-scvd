@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "5500:5500"
+    depends_on:
+      - postgres
+    networks:
+      - backend-network
+    command: >
+      sh -c '
+        db:reset &&
+        node build/app.js || node build/app.js
+      '
+networks:
+  backend-network:
+
+volumes:
+  postgres_data:

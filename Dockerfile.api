@@ -1,0 +1,21 @@
+# Node.js Imagen
+FROM node:18
+
+
+# Copia los archivos de la aplicación
+COPY . .
+
+# Instala las dependencias de Node.js
+RUN npm install
+RUN npm run build
+
+# Ejecuta las migraciones de la base de datos
+#RUN npm run db:create
+#RUN npm run db:migrate up
+
+# Expone el puerto de la aplicación
+EXPOSE 5500
+
+# Comando para iniciar la aplicación
+#CMD ["npm", "run","dev"]
+CMD ["node", "build/app.js"]

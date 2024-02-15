@@ -6,9 +6,11 @@
   "scripts": {
     "test": "vitest",
     "dev": "nodemon src/app.ts",
+    "db:reset": " npm run db:drop && npm run db:create && npm run db:migrate up",
     "db:create": " ts-node src/db/scripts/dbCreate.ts",
     "db:drop": " ts-node src/db/scripts/dbDrop.ts",
-    "db:migrate": "ts-node src/db/scripts/dbMigrate.ts"
+    "db:migrate": "ts-node src/db/scripts/dbMigrate.ts",
+    "build": "tsc"
   },
   "author": "kevin soras",
   "license": "ISC",

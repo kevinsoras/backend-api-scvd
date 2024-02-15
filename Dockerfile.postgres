@@ -1,0 +1,10 @@
+# Utiliza una imagen base de PostgreSQL
+FROM postgres:latest
+
+# Opcional: define variables de entorno para la configuración de PostgreSQL
+ENV POSTGRES_DB=postgres
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=root
+
+# Opcional: copia scripts de inicialización o configuración de la base de datos
+COPY init.sql /docker-entrypoint-initdb.d/
