@@ -4,7 +4,7 @@ import cors from "cors";
 import users from "./routers/users.router";
 import errorHandler from "./middlewares/Error";
 import auth from "./routers/auth.router";
-const app = express();
+export const app = express();
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
