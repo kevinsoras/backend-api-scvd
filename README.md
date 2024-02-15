@@ -9,7 +9,7 @@ Este proyecto presenta una API RESTful , permitiendo a los usuarios con el rol d
 3. [Endpoints](#endpoints)
 4. [Ejemplos de Solicitudes](#ejemplos-de-solicitudes)
 5. [Contribuciones](#contribuciones)
-6. [Licencia](#licencia)a
+6. [Licencia](#licencia)
 
 ## Requisitos
 
