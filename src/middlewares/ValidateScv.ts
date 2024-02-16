@@ -40,7 +40,7 @@ export function validateCsv<T>(schema: ZodSchema<T>) {
           const user = schema.parse(row) as UserData;
           successUsers.push({...user,order:index+1});
         } catch (error) {
-          const detailsError: Record<string, any> = {};
+          const detailsError: Record<string, any> = {...row};
           if (error instanceof ZodError) {
             error.errors.forEach((err) => {
               const fieldName = err.path.join("");

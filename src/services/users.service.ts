@@ -18,11 +18,13 @@ export const insertListUsers = async (users: UserData[]) => {
           errorsUsers.push({
             row: user.order,
             details: {
+              ...{...user,order:undefined},
               insertion:
                 error.code === "23505"
                   ? "Hay un valor unico que se esta duplicando."
                   : "Error en la fila de inserción.",
             },
+            order:undefined
           })
         );
     });
