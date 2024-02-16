@@ -17,8 +17,8 @@ export const insertListUsers = async (users: UserData[]) => {
         .catch((error: any) =>
           errorsUsers.push({
             row: user.order,
+            data:{...user,order:undefined},
             details: {
-              ...{...user,order:undefined},
               insertion:
                 error.code === "23505"
                   ? "Hay un valor unico que se esta duplicando."

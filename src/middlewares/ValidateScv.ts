@@ -40,7 +40,7 @@ export function validateCsv<T>(schema: ZodSchema<T>) {
           const user = schema.parse(row) as UserData;
           successUsers.push({...user,order:index+1});
         } catch (error) {
-          const detailsError: Record<string, any> = {...row};
+          const detailsError: Record<string, any> = {};
           if (error instanceof ZodError) {
             error.errors.forEach((err) => {
               const fieldName = err.path.join("");
@@ -50,7 +50,7 @@ export function validateCsv<T>(schema: ZodSchema<T>) {
           } else {
             detailsError["error"] = "No se pudo leer ningun dato de la fila";
           }
-          errorUsers.push({ row: index+1, details: detailsError });
+          errorUsers.push({ row: index+1,data:row, details: detailsError });
         }
       });
       req.body.usersSucces = successUsers;
